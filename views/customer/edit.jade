@@ -1,0 +1,65 @@
+extends ../layout/base
+block content
+    section.content-header
+        h1
+            | Edit Barang
+            small menu for editing customer data
+        ol.breadcrumb
+            li
+                a(href='#')
+                    i.fa.fa-dashboard
+                    | Level
+            li.active Here
+    section.content
+        .box
+            .box-header.with-border
+                h3.box-title
+                    | Barang
+                .box-tools.pull-right
+                    button(type='button', data-widget='collapse', data-toggle='tooltip',title='collapse').btn.btn-box-tool
+                        i.fa.fa-minus
+            .box-body
+                form(role='form',method='post' action='/customers/edit/#{(id==undefined) ? data.id : id}')
+                    .row
+
+                        .col-xs-6
+                            .box-body
+                                - if (messages.msg_error)
+                                    .alert.alert-danger.alert-dismissable
+                                        button.close(type='button', data-dismiss='alert', aria-hidden='true')
+                                            | ×
+                                        h4
+                                            i.icon.fa.fa-ban
+                                            | Alert!
+                                        | !{messages.msg_error}
+                                - if (messages.msg_info)
+                                    .alert.alert-success.alert-dismissable
+                                            button.close(type='button', data-dismiss='alert', aria-hidden='true')
+                                                | ×
+                                            h4
+                                                i.icon.fa.fa-ban
+                                                | Success!
+                                            | !{messages.msg_info}
+                                .form-group
+                                    label
+                                        | Name
+                                    input(type='text',value="#{data.name}",name='name',placeholder='Enter Name', autofocus).form-control
+                                .form-group
+                                    label
+                                        | Date
+                                    input(type='text',value="#{ (date == undefined) ? data.date : date }",name='date',placeholder='Enter date').form-control
+                                .form-group
+                                    label
+                                        | phone
+                                    input(type='text',value="#{ (phone ==undefined) ? data.phone : phone }",name='phone',placeholder='Enter phone').form-control
+                                .form-group
+                                    label
+                                        | Jenis Barang
+                                    input(type='text',value="#{ (jenis_barang ==undefined) ? data.jenis_barang : jenis_barang }",name='jenis_barang',placeholder='Enter jenis barang').form-control
+                            .box-footer
+                                input(type="hidden",name="_method", value="PUT")
+                                button(type='submit').btn.btn-primary
+                                    i.fa.fa-pencil
+                                    | Edit
+                                a(href='/customers').btn.btn-primary.pull-right
+                                    | Back
